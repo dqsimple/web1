@@ -1,0 +1,789 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+
+        <!-- 上述meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <!-- Bootstrap CSS -->
+        <!-- <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+
+        <link href="{% static 'index/css/index.css' %}" rel="stylesheet"/>
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #007bff;
+            }
+
+            li {
+                float: right;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover {
+                background-color: #111;
+            }
+
+            .card-text{
+                font-size: 12px;
+                text-align: left;
+                font-family: PingFangSC-medium;
+            }
+            .nav-tabs .nav-link{
+                border: 0px;
+            }
+            .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+                color:#1684DC;
+            }
+            .nav-link{
+                border-radius: 18px;
+                color: rgba(51, 51, 51, 1);
+                font-size: 12px;
+                text-align: center;
+                font-family: Arial;
+                border: 1px solid rgba(187, 187, 187, 1);
+                background-color:#FFF;
+            }
+            .button:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            .mb-3, .my-3 {
+                margin-bottom: 0.5rem!important;
+            }
+            .ip{
+                text-align:center;
+                border-radius: 50%;
+                line-height: 20px;
+                background-color: rgba(254, 250, 131, 1);
+                color: rgba(16, 16, 16, 1);
+                font-size: 14px;
+                text-align: center;
+                font-family: Arial;
+                border: 1px solid rgba(187, 187, 187, 1);
+            }
+            .op{
+                text-align:center;
+                border-radius: 50%;
+                line-height: 20px;
+                background-color: rgba(184, 134, 248, 1);
+                color: rgba(16, 16, 16, 1);
+                font-size: 14px;
+                text-align: center;
+                font-family: Arial;
+                border: 1px solid rgba(187, 187, 187, 1);
+            }
+            .tab-content::-webkit-scrollbar {
+                display: none;
+            }
+            .table td, .table th {
+                padding: .45rem;
+            }
+            table tr td{
+                font-size:8px;
+            }
+            table  tr th{
+                font-size:8px;
+            }
+        </style>
+        <style>
+          html {
+            height: 100%;
+          }
+          body{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+          }
+          .card{
+            box-sizing: border-box;
+          }
+          .card-body{
+            background: #79bbff;
+          }
+          .width_custom {
+            width: 100%;
+          }
+          .no_margin{
+            margin:0;
+          }
+          .no_padding{
+            padding: 0;
+          }
+          {% comment %} ------------------------ {% endcomment %}
+          .user-card_wapper{
+            width: 100%;
+            height: 8.38rem;
+          }
+          .user-card_wapper row{
+            width: 100%;
+            height: 100%;
+          }
+          .user-card_wapper .card-img{
+            width: 100%;
+            height: 7.94rem;
+          }
+          .user-card_wapper span{
+            font-size: 0.8rem;
+            font-weight: 600;
+          }
+          .user-card_wapper .avatar_wapper{
+            {% comment %} max-width: 30%; {% endcomment %}
+          }
+          .user-card_wapper .use-info_wapper{
+            padding:0!important;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+          }
+          .user-card_wapper .use-info_wapper .card-text{
+            padding-bottom: 0.2rem;
+            line-height: 1;
+          }
+          .user-card_wapper .use-info_wapper .card-text:first-child{
+            font-weight:800;
+          }
+          .user-card_wapper .login-out_wapper{
+            padding: 0;
+          }
+          .user-card_wapper .login-out_wapper img{
+              width:1.5rem;
+              height:1.5rem;
+              display: block;
+          }
+          .user-card_wapper .login-out_wapper a {
+            vertical-align: top;
+            font-size:0.6rem;
+            outline: none;
+            color: #101010;   
+            font-weight: 800;
+          }
+          {% comment %} ------------------------ {% endcomment %}
+
+          {% comment %} ------------------------ {% endcomment %}
+          .no_border{
+            border:none;
+          }
+          .title-one_wapper{
+            text-align: left;
+            color: rgba(16, 16, 16, 1);
+          }
+          .title-one_wapper span{
+            font-family: PingFangSC-semiBold;
+            font-size: 0.9rem;
+          }
+          .title-one_wapper img {
+            width: 1.5rem;
+            height: 1.5rem;
+          }
+
+          .dropdown button{
+            padding: 0.02rem 0.6rem;
+
+          }
+          .dropdown .dropdown-menu{
+            right: 0;
+            /*top: 1.3rem!important;*/
+            box-shadow: 0 0 1rem rgba(0, 0, 0, .12);
+            transform:noneimportant;
+          }
+          .table_wapper{
+            width:100%;
+            height: 10.5rem;
+            box-sizing: border-box;
+            padding: 0.2rem 0.8rem;
+            background:transparent;
+          }
+          .table-box_wapper{
+            box-shadow: 0rem 0.13rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
+            border-radius: 0.2rem;
+          }
+          .table-box_wapper .table-striped {
+            background-color: #a0cfff!important;
+          }
+          {% comment %} ------------------------ {% endcomment %}
+
+          {% comment %} ------------------------ {% endcomment %}
+          .card-two_wapper{
+            height:100%;
+          }
+          .card-two_wapper .title-one_wapper{
+            padding-bottom: 0.4rem;
+          }
+          #p-group{
+            padding: 0.4rem 0.8rem;
+          }
+          .card-two_wapper .nav-item button{
+            min-width:5rem;
+            max-width:6.5rem;
+            border-radius: 0.2rem;
+            font-size: 0.6rem;
+            text-align: center;
+            font-family: Arial;
+            border: 1px solid rgba(187, 187, 187, 1);
+            padding: 0.2rem 0.6rem;
+            font-weight: 600;
+          }
+          .card-two_wapper ul {
+            padding:0 0.8rem;
+          }
+          .card-two_wapper .tab-content{
+            height: 100%%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+          }
+          .card-two_wapper .tab-pane .card{
+            padding: 0.2rem 0.8rem;
+            background-color: #fff;
+            color: rgba(16, 16, 16, 1);
+            text-align: center;
+            
+            font-family: Arial;
+            border: 1px solid rgba(255, 255, 255, 1);
+          }
+          .card-two_wapper .tab-pane .card-body{
+            background: #E4E7ED;
+            width: 100%;
+          }
+          .card-item_wapper{
+            padding:0;
+            border-radius: 0.4rem;
+            box-shadow: 0px 0.1rem 0.8rem 0px rgba(0, 0, 0, 0.4);
+          }
+          .badge_custom{
+            width: 1.5rem;
+            height: 1.5rem;
+            line-height:1.5rem;
+            text-align:center;
+            font-size:0.8rem;
+            padding:0;
+          }
+          .row_padding_custom {
+            border-bottom: 1px solid #fff;
+            padding: 0.3rem;
+          }
+          .table_cell{
+            background:#fff;
+            text-align: left;
+            word-wrap: break-word;
+            max-height: 2.2rem;
+          }
+          {% comment %} ------------------------ {% endcomment %}
+          
+          {% comment %} ------------------------ {% endcomment %}
+          .table_wapper{
+            flex:8;
+          }
+          {% comment %} ------------------------ {% endcomment %}
+
+
+           {% comment %} ------------------------ {% endcomment %}
+          .footer_wapper{
+            flex:auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+          }
+          .footer_wapper_box{
+            margin:0 auto;
+            margin-top: 0.6rem;
+            flex:1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            max-height: 10rem;
+          }
+          .footer_wapper_box .title-one_wapper{
+            flex: 1;
+          }
+          
+          .footer_wapper_box .card{
+            margin:0 auto;
+            padding:0.4rem;
+            text-align:center;
+            height:100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+          .footer_wapper_box .card .row:first-child {
+            margin-bottom: 0.4rem;
+          }
+          .footer_wapper_box .card .row .col-4{
+            padding: 0 0.2rem;
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+          }
+          .footer_wapper_box .card .row .col-4 a {
+            padding: 0.3rem;
+          } 
+          
+          {% comment %} ------------------------ {% endcomment %}
+        </style>
+        <title>Index</title>
+    </head>
+    <body style="overflow-x:hidden;">
+        {% csrf_token %}
+        <div class="container" style="padding: 0;">
+            <div class="card" style="background-color: #4095E5;">
+                <div class="card-body user-card_wapper" style="padding: 0.1rem 0.2rem;">
+                    <div class="row">
+                        <div class="col-4 avatar_wapper">
+                            <!--<img src="{% static 'p_1.JPG' %}" class="card-img" alt="Image" style="width: 7rem;">-->
+                            <img src="data:image/png;base64,{{ Photo }}" class="card-img" alt="Image" style="max-width: 7rem;">
+                        </div>
+                        <div class="col-6 use-info_wapper">
+                            <div class="card-text" style="font-weight: 800;">
+                                {{p1_Name}}
+                            </div>
+                            <div class="card-text">
+                                {{age}},{{p1.gender}},{{Height_Last}},{{Weight_Last}}
+                            </div>
+                            <div class="card-text">
+                              <span>Birth Date:</span> {{BirthDate}}
+                            </div>
+                            <div class="card-text">
+                              <span>Phone:</span> {{Phone}}
+                            </div>
+                            <div class="card-text">
+                              <span>City:</span> {{Address}}
+                            </div>
+                            <div class="card-text">
+                              <span>Email:</span> {{Email}}
+                            </div>
+                        </div>
+                        <!--
+                        <div class="col-2 login-out_wapper" >
+                            <img src="{% static 'images/quit.svg' %}"/>
+                            <a href="/PHR/logout/">Log out</a>
+                        </div>-->
+                        <div class="col-2">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="background-color: #28a745;
+                                color: rgba(255, 255, 255, 1);font-size: 15px;text-align: left;box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.4);font-family: Arial;float:right;font-weight: bold;">
+                                    MENU
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="/PHR/Auditable_Records/" style="font-size: 12px;">Auditable Records</a>
+                                    <a class="dropdown-item" href="/PHR/logout/" style="font-size: 12px;">Log out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container no_border" style="padding:0px">
+            <div class="card no_border">
+                <div class="row" style="padding:0.2rem 0.8rem 0 0;">
+                    <div class="col-9">
+                        <div class="card-text title-one_wapper">
+                           <img src="{% static 'images/bx-run.svg' %}" />
+                           <span>Patient-Generated Health Data</span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="background-color: rgba(233, 157, 66, 1);
+                            color: rgba(255, 255, 255, 1);font-size: 12px;text-align: left;box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.4);font-family: Arial;float:right;">
+                                Records
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="/PHR/edit/" style="font-size: 12px;">New record</a>
+                                <a class="dropdown-item" href="/PHR/Height_Record/" style="font-size: 12px;">Height</a>
+                                <a class="dropdown-item" href="/PHR/Weight_Record/" style="font-size: 12px;">Weight</a>
+                                <a class="dropdown-item" href="/PHR/Temperature_Record/" style="font-size: 12px;">Temperature</a>
+                                <a class="dropdown-item" href="/PHR/Steps_Record/" style="font-size: 12px;">Steps</a>
+                                <a class="dropdown-item" href="/PHR/BMI_Record/" style="font-size: 12px;">BMI</a>
+                                <a class="dropdown-item" href="/PHR/BloodPressure_Record/" style="font-size: 12px;">Blood Pressure</a>
+                                <a class="dropdown-item" href="/PHR/HeartRate_Record/" style="font-size: 12px;">Heart Rate</a>
+                                <a class="dropdown-item" href="/PHR/Respiration_Record/" style="font-size: 12px;">Respiration</a>
+                                <a class="dropdown-item" href="/PHR/Smoking_Record/" style="font-size: 12px;">Smoking</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table_wapper">
+                   <div class="table-box_wapper">
+                      <table class="table table-striped" style="line-height: 1px;font-size: 12px;text-align: center;font-family: Arial;">
+                        <thead style="background-color: rgba(22, 132, 252, 1);color: #101010;line-height: 1px;text-align: center;font-family: Arial;">
+                            <tr>
+                                <th scope="col">Type</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Height</td>
+                                <td>{{Height_Last}}</td>
+                                <td>{{Height_Trend}}</td>
+                            </tr>
+                            <tr>
+                                <td>Weight</td>
+                                <td>{{Weight_Last}}</td>
+                                <td>{{Weight_Trend}}</td>
+                            </tr>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>{{BodyTem_Last}}</td>
+                                <td>{{BodyTem_Trend}}</td>
+                            </tr>
+                            <tr>
+                                <td>Steps</td>
+                                <td>{{Steps_Last}}</td>
+                                <td>{{Steps_Trend}}</td>
+                            </tr>
+                            <tr>
+                                <td>BMI</td>
+                                <td>{{BMI_Last}}</td>
+                                <td>{{BMI_Trend}}</td>
+                            </tr>
+                            <tr>
+                                <td>Blood Pressure</td>
+                                <td>{{BP_Last}}</td>
+                                <td>{{BP_Trend}}</td>
+                            </tr>
+                            <tr>
+                                <td>Heart Rate</td>
+                                <td>{{HR_Last}}</td>
+                                <td>{{HR_Trend}}</td>
+                            </tr>
+                            <tr>
+                                <td>Respiration</td>
+                                <td>{{RR_Last}}</td>
+                                <td>{{RR_Trend}}</td>
+                            </tr>
+                            <tr>
+                                <td>Smoking</td>
+                                <td>{{Smoking_Last}}</td>
+                                <td>{{Smoking_Trend}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="container table_wapper" style="padding: 0px;">
+            <div class="card card-two_wapper no_border">
+                <div class="card-text title-one_wapper">
+                    <img src="{% static 'images/qubiezhen.svg' %}" style="width:1.2rem;height:1.2rem"/>
+                    <span>Encounter History</span>
+                </div>
+                <ul id="p-group" class="nav nav-pills mb-3" role="tablist" style="background-color:white;overflow: inherit;">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="all-tab" data-toggle="tab" data-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">All</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="inpatient-tab" data-toggle="tab" data-target="#inpatient" type="button" role="tab" aria-controls="inpatient" aria-selected="false" >Inpatient</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="outpatient-tab" data-toggle="tab" data-target="#outpatient" type="button" role="tab" aria-controls="outpatient" aria-selected="false" >Outpatient</button>
+                    </li>
+                </ul>
+                <div class="tab-content" style="">
+                    <div class="tab-pane active" id="all" role="tabpanel" aria-labelledby="all-tab" >
+                        {% for En_id, k, t1, t2, department, p in En_All_DataList %}
+                        {% if k == "Inpatient" %}
+                        <a href="{% url 'PHR:Visit' En_id %}">
+                            <div class="card">
+                                <div class="card-body card-item_wapper">
+                                    <div class="row width_custom no_margin row_padding_custom" >
+                                        <div class="col-1" style="padding:0px; margin-left:0%;">
+                                            <div class="ip badge_custom" style="">
+                                                IP
+                                            </div>
+                                        </div>
+                                        <div class="col-4" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{t1}}</div>
+                                        </div>
+                                        <div class="col-4" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{t2}}</div>
+                                        </div>
+                                        <div class="col-3" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{department}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row width_custom no_margin row_padding_custom">
+                                        <div class="col-5 no_padding" >
+                                            <div class="card-text"style="text-align:center;" >
+                                                Diagnosis:
+                                            </div>
+                                        </div>
+                                        <div class="col-7 table_cell no_padding" >
+                                            <div class="card-text" >{{p}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+                        {% endif %}
+                        {% if k == "Outpatient" %}
+                        <a href="{% url 'PHR:Visit' En_id %}">
+                            <div class="card">
+                                <div class="card-body card-item_wapper">
+                                    <div class="row width_custom no_margin row_padding_custom">
+                                        <div class="col-1" style="padding:0px; margin-left:0%;">
+                                            <div class="op badge_custom" style="">
+                                                OP
+                                            </div>
+                                        </div>
+                                        <div class="col-4" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{t1}}</div>
+                                        </div>
+                                        <div class="col-4" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{t2}}</div>
+                                        </div>
+                                        <div class="col-3" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{department}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row width_custom no_margin row_padding_custom">
+                                        <div class="col-5 no_padding">
+                                            <div class="card-text" style="text-align:center;">
+                                                Diagnosis:
+                                            </div>
+                                        </div>
+                                        <div class="col-7 table_cell no_padding">
+                                            <div class="card-text" >{{p}}</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </a>
+                        {% endif %}
+
+                        {% endfor %}
+                    </div>
+                    <div class="tab-pane" id="inpatient" role="tabpanel" aria-labelledby="inpatient-tab">
+                        {% for En_id, k, t1, t2, department, p in En_All_DataList %}
+                        {% if k == "Inpatient" %}
+                        <a href="{% url 'PHR:Visit' En_id %}">
+                            <div class="card">
+                                <div class="card-body card-item_wapper">
+                                    <div class="row width_custom no_margin row_padding_custom" >
+                                        <div class="col-1" style="padding:0px; margin-left:0%;">
+                                            <div class="ip badge_custom" style="">
+                                                IP
+                                            </div>
+                                        </div>
+                                        <div class="col-4" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{t1}}</div>
+                                        </div>
+                                        <div class="col-4" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{t2}}</div>
+                                        </div>
+                                        <div class="col-3" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{department}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row width_custom no_margin row_padding_custom">
+                                        <div class="col-5 no_padding" >
+                                            <div class="card-text"style="text-align:center;" >
+                                                Diagnosis:
+                                            </div>
+                                        </div>
+                                        <div class="col-7 table_cell no_padding" >
+                                            <div class="card-text" >{{p}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+                        {% endif %}
+
+                        {% endfor %}
+                    </div>
+                    <div class="tab-pane" id="outpatient" role="tabpanel" aria-labelledby="outpatient-tab">
+                        {% for En_id, k, t1, t2, department, p in En_All_DataList %}
+
+                        {% if k == "Outpatient" %}
+                        <a href="{% url 'PHR:Visit' En_id %}">
+                            <div class="card">
+                                <div class="card-body card-item_wapper" >
+                                    <div class="row width_custom no_margin row_padding_custom">
+                                        <div class="col-1" style="padding:0px; margin-left:0%;">
+                                            <div class="op badge_custom" style="">
+                                                OP
+                                            </div>
+                                        </div>
+                                        <div class="col-4" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{t1}}</div>
+                                        </div>
+                                        <div class="col-4" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{t2}}</div>
+                                        </div>
+                                        <div class="col-3" style="padding:0px; margin-left:0%;">
+                                            <div class="card-text" style="text-align:center;">{{department}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row width_custom no_margin row_padding_custom">
+                                        <div class="col-5 no_padding" >
+                                            <div class="card-text"style="text-align:center;" >
+                                                Diagnosis:
+                                            </div>
+                                        </div>
+                                        <div class="col-7 table_cell no_padding" >
+                                            <div class="card-text" >{{p}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer_wapper">
+          <div class="container footer_wapper_box no_margin no_padding">
+            <div class="card-text title-one_wapper">
+              <img src="{% static 'images/document.svg' %}" style="width:1.2rem;height:1.2rem"/>
+              <span>Comprehensive Records</span>
+            </div>
+            <div style="flex: auto;padding:0 0.8rem 0.2rem 0.8rem">
+              <div class="card" style="background-color: rgba(239, 239, 239, 1);text-align: center;box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);">
+                <div class="row no_margin" >
+                    <div class="col-4">
+                        <a class="btn btn-primary" href="/PHR/Height_Record_VitalSign/"  style="border-radius: 6px;background-color: rgba(254, 67, 101, 1);
+                            color: rgba(255, 255, 255, 1);font-size: 16px;text-align: center;box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+                            font-family: Arial;border: 1px solid rgba(187, 187, 187, 1);width: 100%;line-height: 24px;">
+                            Vital Signs
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-primary" href="/PHR/Imaging_History/"  style="border-radius: 6px;background-color: rgba(147, 210, 243, 1);
+                            color: rgba(255, 255, 255, 1);font-size: 16px;text-align: center;box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+                            font-family: Arial;border: 1px solid rgba(187, 187, 187, 1);width: 100%;line-height: 24px;">
+                            Imaging
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-primary" href="/PHR/Laboratory_History/"  style="border-radius: 6px;background-color: rgba(119, 52, 96, 1);
+                            color: rgba(255, 255, 255, 1);font-size: 16px;text-align: center;box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+                            font-family: Arial;border: 1px solid rgba(187, 187, 187, 1);width: 100%;line-height: 24px;">
+                            Laboratory
+                        </a>
+                    </div>
+                </div>
+                <div class="row no_margin">
+                    <div class="col-4">
+                        <a class="btn btn-primary" href="/PHR/Medications_History/"  style="border-radius: 6px;background-color: rgba(172, 81, 24, 1);
+                            color: rgba(255, 255, 255, 1);font-size: 14px;text-align: center;box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+                            font-family: Arial;border: 1px solid rgba(187, 187, 187, 1);width: 100%;line-height: 24px;">
+                            Medications
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-primary" href="/PHR/Allergies_History/"  style="border-radius: 6px;background-color: rgba(249, 205, 173, 1);
+                            color: rgba(255, 255, 255, 1);font-size: 16px;text-align: center;box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+                            font-family: Arial;border: 1px solid rgba(187, 187, 187, 1);width: 100%;line-height: 24px;">
+                            Allergies
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-primary" href="/PHR/Diagnosis_History/"  style="border-radius: 6px;background-color: rgba(131, 175, 155, 1);
+                            color: rgba(255, 255, 255, 1);font-size: 16px;text-align: center;box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+                            font-family: Arial;border: 1px solid rgba(187, 187, 187, 1);width: 100%;line-height: 24px;">
+                            Diagnosis
+                        </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% comment %} </div> {% endcomment %}
+
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script type="text/javascript">
+            var legend_data = {{ legend_data | safe }};
+
+            var Height_DataList1 = {{ Height_DataList1 | safe}};
+            var Weight_DataList1 = {{ Weight_DataList1 | safe}};
+            var myChart = echarts.init(document.getElementById('Graph'));
+
+            var option = {
+
+                tooltip:{
+                    trigger: 'axis'
+                    },
+                legend:{
+                    data:legend_data,
+                    textStyle: {
+                        fontSize: 10,
+                        },
+                    itemHeight: 10,
+                    top:"10%"
+                    },
+                grid:{
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                    },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: ['10%','20%']
+                    },
+                yAxis:[{
+                    type: 'value'
+                    },{
+                    type: 'value'
+                    }],
+                series: [
+                    {
+                        name:legend_data[0],
+                        type:'line',
+                        color:'#d43f3a',
+                        data: Height_DataList1
+                    },
+                    {
+                        name:legend_data[1],
+                        type:'line',
+                        color:'#0000ff',
+                        data: Weight_DataList1
+                    }
+                ],
+                dataZoom: [
+                    {
+                        id: 'dataZoomX',
+                        type: 'inside',
+                        xAxisIndex: [0],
+                        minSpan: 10
+                    }
+                ]
+            };
+            myChart.setOption(option)
+        </script>
+
+    </body>
+</html>

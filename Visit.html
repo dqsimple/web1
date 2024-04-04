@@ -1,0 +1,1364 @@
+<!--
+ * @Author       : Xiao Xiang Lun
+ * @Date         : 2023-10-24 14:55:03
+ * @LastEditors  : snowlove xiaoxl@botech.com.cn
+ * @LastEditTime : 2023-10-24 14:55:04
+ * @FilePath     : /Visit.html
+ * @Environment  : mac node v16.3.0
+ * @Description  : 
+ * 关注作者请访问 https://snowlove.synology.me:5 
+ * 备用地址:https://nas.snowlove.top:5
+-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- 上述meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <!-- Bootstrap CSS -->
+        <!-- <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+
+        <link href="{% static 'index/css/index.css' %}" rel="stylesheet"/>
+        <style>
+            .nav-link:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            .button:focus {
+                outline: none;
+            }
+            .nav-link.active{
+                color: #F79F77;
+                background-color: #fff;
+                text-shadow: none;
+                border-bottom: 1px solid #F79F77;
+            }
+            .nav-link{
+                color: #82848F;
+                background-color: rgba(255, 255, 255, 1);
+                {% comment %} text-shadow: 0.1em 0.1em 0.2em #82848F; {% endcomment %}
+                border: 0px;
+            }
+            .back:hover{
+                color:#fff;
+                background-color:#b3d7ff;
+                border-color:#b3d7ff;
+                text-decoration: none;
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: rgba(247, 247, 247, 0.8);
+            }
+
+            li {
+                float: left;
+            }
+            .table td, .table th {
+                padding: 0.15rem;
+            }
+            li a {
+                display: block;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            .col-3 {
+                padding-right: 10px;
+                padding-left: 10px;
+                
+            }
+
+        </style>
+        <style>
+          html {
+            height: 100%;
+          }
+          body{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+          }
+          .row{
+            margin:0;
+          }
+          .container{
+            height: 100%;
+            padding: 0;
+            margin: 0;
+          }
+          .ellipsis{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          .title{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            font-weight:600;
+          }
+          .card-top_wapper{
+            padding:0.4rem;
+            flex: 2;
+          }
+          .card-top_wapper .card-title{
+            background-color:#79bbff;
+            color:#fff;
+            border-radius: 0.2rem;
+            font-size: 0.9rem;
+            text-align: center;
+            box-shadow: 0rem 0.13rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
+            font-family: Arial;
+
+          }
+          .card-top_wapper > .card{
+            background-color: #FAFCFF!important;
+            color: #606266;
+            border:none;
+          }
+          .card-top_wapper .card-body{
+            box-shadow: 0rem 0.13rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
+          }
+          .col_wapper{
+            background-color: #d9ecff;
+            border-radius: 0.2rem;
+            padding: 0.1rem 0.3rem;
+            font-family:Arial;
+            word-break: break-all;
+          }
+
+
+          .nav{
+            
+          }
+          .gip_wapper{
+            width:30%;
+            height: 0.05rem;
+            margin: 0.8rem auto;
+            background-color:#dcdfe6;
+          }
+          .card-bottom_wapper{
+            flex: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            {% comment %} overflow: hidden; {% endcomment %}
+          }
+          .card-bottom_wapper  .tab-content{
+            flex: auto;
+            height:100%;
+            display: flex;
+            flex-direction: column;
+          }
+          .card-bottom_wapper  .tab-content .tab-pane{
+            height:100%;
+          }
+          .card-bottom_wapper thead{
+            color: #fff;
+            font-size: 0.8rem;
+            text-align: left;
+            font-family: PingFangSC-regular;
+            background-color: #79bbff;
+            vertical-align: middle;
+          }
+          .card-bottom_wapper tbody tr{
+            width: 100%;
+            display: block;
+          }
+          .card-bottom_wapper tbody td{
+              width:20%;
+              text-align: right;
+              vertical-align: middle;
+          }
+          .card-bottom_wapper .table-striped{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            max-height:7rem;
+          }
+          .card-bottom_wapper tbody{
+            height: 100%;
+            flex: auto;
+          }
+          .comments{
+            font-size: 0.6rem;
+            font-weight: lighter;
+            font-family: system-ui;
+            width: 30%;
+          }
+          .card-bottom_wapper .tab-pane.active{
+            display: flex;
+            flex-direction: column; 
+            flex: auto;
+            overflow:hidden;
+            }
+          .card-bottom_wapper .tab-pane.active>container:first-child{
+            max-height: 3rem;
+          }
+          .card-bottom_wapper .tab-pane.active>container:last-child{
+            flex: auto;
+            height:100%;
+          }
+          .card-bottom_wapper .tab-pane.active .row ,.card-bottom_wapper .tab-pane.active .row .col{
+            height: 100%;
+            padding:0!important;
+          }
+          #Graph1,#Graph2,#Graph3{
+            height:100%;
+            width:100%;
+          }
+          #Imaging,#Laboratory{
+            height: auto;
+            flex: none;
+          }
+          #Imaging .table-striped,#Laboratory  .table-striped{
+            display: inline-table!important;
+          }
+          #Imaging tbody tr,#Laboratory tbody tr{
+            width: 100%;
+            display: table-row;
+          }
+          
+        </style>
+        <title>Encounter History</title>
+    </head>
+    <body style="">
+        <ul style="position: relative;">
+            <li><a href="/PHR/index/" class="back">< Back</a></li>
+            <span class="title">VISIT</span>
+        </ul>
+        <div class="container card-top_wapper" >
+            <div class="card" style="background-color: #F6D58A;">
+                {% for t1, t2, hospital, department, reason, p, a in En_All_DataList %}
+                <div class="card-body" style="padding: 0.6rem 0;">
+                    <div class="row" style="margin-top: -1rem;">
+                        <div class="col-2"></div>
+                        <div class="col-8 card-title" style="">
+                            Visit Card
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3" style="font-size:12px;padding-left: 0.9rem;padding-right:0px;font-family: PingFangSC-semiBold;min-width:29%;">
+                            Admission time:
+                        </div>
+                        <div class="col-3 ellipsis" style="font-size:12px;word-break: break-all;text-decoration-line: underline;
+                        padding-left:0px;padding-right:5px;font-family: PingFangSC-regular;">
+                            {{t1}}
+                        </div>
+                        <div class="col-3" style="font-size:12px;font-family: PingFangSC-semiBold;padding-right:0px;
+                        padding-left:0px;max-width: 25%;">
+                            Discharge time:
+                        </div>
+                        <div class="col-3 ellipsis" style="font-size:12px;word-break: break-all;padding-left:0px;text-decoration-line: underline;
+                        font-family: PingFangSC-regular;max-width: 21%;">
+                            {{t2}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2" style="font-size:12px;padding-right:0px;font-family: PingFangSC-semiBold;max-width: 18%;">
+                            Hospital:
+                        </div>
+                        <div class="col-4" style="font-size:12px;word-break: break-all;text-decoration-line: underline;
+                        padding-left:5px;padding-right:5px;font-family: PingFangSC-regular;max-width: 29%;">
+                            {{hospital}}
+                        </div>
+                        <div class="col-2" style="font-size:12px;font-family: PingFangSC-semiBold;padding-right:0px;
+                        padding-left:0px;max-width: 20%;">
+                            Department:
+                        </div>
+                        <div class="col-4" style="font-size:12px;word-break: break-all;padding-left:5px;text-decoration-line: underline;
+                        font-family: PingFangSC-regular;">
+                            {{department}}
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col" style="font-family: PingFangSC-semiBold;">
+                            Purpose of Visit:
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                        <div class="col col_wapper" >
+                            {{reason}}
+                        </div>
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col" style="font-family: PingFangSC-semiBold;">
+                            Primary Diagnosis:
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                        <div class="col col_wapper" >
+                            {{p}}
+                        </div>
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col" style="font-family: PingFangSC-semiBold;">
+                            Secondary Diagnosis:
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                        <div class="col col_wapper" >
+                            {{a}}
+                        </div>
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="card-body" style="padding: 0.8rem;">
+                    <div class="row" style="margin-top: -1rem;">
+                        <div class="col-2"></div>
+                        <div class="col-8" style="background-color:#7F83F7;border-radius: 4px 4px 4px 4px;color: rgba(16, 16, 16, 1);
+                        font-size: 16px;text-align: center;box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);font-family: Arial;">
+                            Visit Card
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3" style="font-size:12px;padding-right:0px;font-family: PingFangSC-semiBold;min-width:29%;">
+                            Admission time:
+                        </div>
+                        <div class="col-3" style="font-size:12px;word-break: break-all;text-decoration-line: underline;
+                        padding-left:0px;padding-right:5px;font-family: PingFangSC-regular;">
+                            None
+                        </div>
+                        <div class="col-3" style="font-size:12px;font-family: PingFangSC-semiBold;padding-right:0px;
+                        padding-left:0px;max-width: 25%;">
+                            Discharge time:
+                        </div>
+                        <div class="col-3" style="font-size:12px;word-break: break-all;padding-left:0px;text-decoration-line: underline;
+                        font-family: PingFangSC-regular;max-width: 21%;">
+                            None
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2" style="font-size:12px;padding-right:0px;font-family: PingFangSC-semiBold;max-width: 18%;">
+                            Hospital:
+                        </div>
+                        <div class="col-4" style="font-size:12px;word-break: break-all;text-decoration-line: underline;
+                        padding-left:5px;padding-right:5px;font-family: PingFangSC-regular;max-width: 29%;">
+                            None
+                        </div>
+                        <div class="col-2" style="font-size:12px;font-family: PingFangSC-semiBold;padding-right:0px;
+                        padding-left:0px;max-width: 20%;">
+                            Department:
+                        </div>
+                        <div class="col-4" style="font-size:12px;word-break: break-all;padding-left:5px;text-decoration-line: underline;
+                        font-family: PingFangSC-regular;">
+                            None
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col" style="font-family: PingFangSC-semiBold;">
+                            Purpose of Visit:
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                        <div class="col" style="font-family:Arial;word-break: break-all;background-color:#54BCBD;">
+                            None
+                        </div>
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col" style="font-family: PingFangSC-semiBold;">
+                            Primary Diagnosis:
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                        <div class="col" style="font-family:Arial;word-break: break-all;background-color:#54BCBD;">
+                            None
+                        </div>
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col" style="font-family: PingFangSC-semiBold;">
+                            Secondary Diagnosis:
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:12px;">
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                        <div class="col" style="font-family:Arial;word-break: break-all;background-color:#54BCBD;">
+                            None
+                        </div>
+                        <div class="col-1" style="padding-right: 10px;padding-left: 0px;max-width:4%;"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container card-bottom_wapper" style="padding-right: 10px;padding-left: 10px;">
+           <div>
+              <ul id="p-group" class="nav" role="tablist" style="background-color:white;min-width: calc(100% + 1px)">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="Allergies-tab" data-toggle="tab" data-target="#Allergies" role="tab"
+                            aria-controls="Allergies" aria-selected="true" style="width:71px;font-size: 12px;
+                            text-align: center;font-family: Arial;padding-left: 0px;padding-right: 0px;
+                            line-height: 10px;">
+                        Allergies
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="VitalSigns-tab" data-toggle="tab" data-target="#VitalSigns" type="button" role="tab"
+                            aria-controls="VitalSigns" aria-selected="false" style="width:71px;font-size: 12px;
+                            text-align: center;font-family: Arial;padding-left: 0px;padding-right: 0px;
+                            line-height: 10px;">
+                        Vital Signs
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="Medication-tab" data-toggle="tab" data-target="#Medication" type="button" role="tab"
+                            aria-controls="Medication" aria-selected="false" style="width:71px;font-size: 12px;
+                            text-align: center;font-family: Arial;padding-left: 0px;padding-right: 0px;
+                            line-height: 10px;">
+                        Medication
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="Imaging-tab" data-toggle="tab" data-target="#Imaging" type="button" role="tab"
+                            aria-controls="Imaging" aria-selected="false" style="width:71px;font-size: 12px;
+                            text-align: center;font-family: Arial;padding-left: 0px;padding-right: 0px;
+                            line-height: 10px;">
+                        Imaging
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="Laboratory-tab" data-toggle="tab" data-target="#Laboratory" type="button" role="tab"
+                            aria-controls="Laboratory" aria-selected="false" style="width:71px;font-size: 12px;
+                            text-align: center;font-family: Arial;padding-left: 0px;padding-right: 0px;
+                            line-height: 10px;">
+                        Laboratory
+                    </button>
+                </li>
+            </ul>
+            {% comment %} <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4" style="border-bottom: 1px solid #82848F; margin-top: 1rem;"></div>
+            </div> {% endcomment %}
+            <div class="gip_wapper"></div>
+           </div>
+            <div class="tab-content">
+                <div class="tab-pane active" id="Allergies" role="tabpanel" aria-labelledby="Allergies-tab" style="">
+                    <div class="container" style="padding:0;height:100%">
+                        <table class="table table-striped" style="line-height: 10px;text-align: center;font-family: Arial;max-height:none;">
+                            <thead >
+                            <tr>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 18px;width:15%;">
+                                    Allergen
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 18px;width:35%;">
+                                    Noted DATE
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 18px;width:10%;">
+                                    Severity
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 18px;width:20%;">
+                                    Reaction
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 18px;width:30%;">
+                                    Comments
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody  style="overflow-y: auto;">
+
+                            {% for Allergen,t,Severity,Reaction,Comments in Allergies_DataList1 %}
+                            <tr>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;width: 15%;">
+                                    {{Allergen}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;width:30%;">
+                                    {{t}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;width:10%;">
+                                    {{Severity}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;width:20%;">
+                                    {{Reaction}}
+                                </td>
+                                <td  class="comments" style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                    {{Comments}}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;">penicillin</td>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;">2021-10-15</td>
+                                <td  style="vertical-align: middle;font-size: 12px;">High</td>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;">Hives</td>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;"></td>
+                            </tr>
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="VitalSigns" role="tabpanel" aria-labelledby="VitalSigns-tab">
+                    <div class="container" style="padding: 0.2rem;max-height:155px">
+                        <table class="table table-striped" style="line-height: 10px;text-align: center;font-family: Arial;">
+                            <thead style="color: rgba(0, 118, 255, 1);font-size: 12px;text-align: left;
+                            font-family: PingFangSC-regular; background-color: #80BEF5;vertical-align:middle;">
+                            <tr>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:30%;">
+                                    Datetime
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:10%;">
+                                    Temperature
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:10%;">
+                                    Pulse
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:25%;">
+                                    Respiration
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:25%;">
+                                    Blood Pressure
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for t,Temperature,Pulse,Respiration,BloodPressure in VitalSigns_DataList1 %}
+                            <tr>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                    {{t}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                    {{Temperature}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;">
+                                    {{Pulse}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                    {{Respiration}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                    {{BloodPressure}}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;"></td>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;"></td>
+                                <td  style="vertical-align: middle;font-size: 12px;"></td>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;"></td>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;"></td>
+                            </tr>
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container" id="echart-box" style="">
+                        <nav>
+                            <div class="nav nav-pills mb-3" id="graph-tab" role="tablist" style="">
+                                <button type="button" class="nav-link active" id="days-tab" data-toggle="pill" data-target="#days" roll="tab" aria-controls="days" aria-selected="true"
+                                style="margin-left:auto;border: 1px solid #007bff;font-size: 12px;padding: 0.2rem 1rem;">
+                                    Days
+                                </button>
+                                <button type="button" class="nav-link" id="months-tab" data-toggle="pill" data-target="#months" roll="tab" aria-controls="months" aria-selected="false"
+                                 style="border: 1px solid #007bff;font-size: 12px;padding: 0.2rem 1rem;">
+                                    Months
+                                </button>
+                                <button type="button" class="nav-link" id="years-tab" data-toggle="pill" data-target="#years" roll="tab" aria-controls="years" aria-selected="false"
+                                 style="margin-right:auto;border: 1px solid #007bff;font-size: 12px;padding: 0.2rem 1rem;">
+                                    Years
+                                </button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="graph-tabContent">
+                            <div class="tab-pane fade show active" id="days" role="tabpanel" aria-labelledby="days-tab">
+                                <div class="row" style="width: 100%;padding:2%;margin-left: auto;margin-right: auto;">
+                                    <div class="col echart_wapper" >
+                                        <div id = "Graph1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="months" role="tabpanel" aria-labelledby="months-tab">
+                                <div class="row" style="width: 100%;padding:2%;margin-left: auto;    margin-right: auto;">
+                                    <div class="col echart_wapper" style="width:100%">
+                                        <div id = "Graph2" ></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="years" role="tabpanel" aria-labelledby="years-tab">
+                                <div class="row" style="width: 100%;padding:2%;margin-left: auto;    margin-right: auto;">
+                                    <div class="col echart_wapper" style="width:100%">
+                                        <div id = "Graph3" ></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane" id="Medication" role="tabpanel" aria-labelledby="Medication-tab">
+                    <div class="container" >
+                        {% for Name,Dose,Way,FreQ,Start,End in Medications_DataList1 %}
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                                        aria-expanded="false" style="width:100%;vertical-align: middle;font-size: 12px;
+                                        word-break: break-all;background-color: #b6e0f7;">
+                                    {{Name}}
+                                </button>
+                                <div class="dropdown-menu" style="width:91%;">
+                                    <a class="dropdown-item" href="#" style="vertical-align: middle;font-size: 12px;">
+                                        <div class="row">
+                                            <div class="col" style="vertical-align: middle;font-size: 12px;">
+                                                {{Dose}}
+                                            </div>
+                                            <div class="col" style="vertical-align: middle;font-size: 12px;">
+                                                {{Way}}
+                                            </div>
+                                            <div class="col" style="vertical-align: middle;font-size: 12px;">
+                                                {{FreQ}}
+                                            </div>
+                                            <div class="col" style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                                {{Start}}
+                                            </div>
+                                            <div class="col" style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                                {{End}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {% empty %}
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10" style="padding:0px;">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                                        aria-expanded="false" style="width:100%;vertical-align: middle;font-size: 12px;
+                                        word-break: break-all;background-color: #b6e0f7;color:black;">
+                                    Cefotaxime Sodium for Injection ⏋
+                                </button>
+                                <div class="dropdown-menu" style="width:100%;">
+                                    <a class="dropdown-item" href="#" style="vertical-align: middle;font-size: 12px;">
+                                        <div class="row">
+                                            <div class="col" style="vertical-align: middle;font-size: 12px;">
+                                                1g
+                                            </div>
+                                            <div class="col" style="vertical-align: middle;font-size: 12px;">
+                                                i.v
+                                            </div>
+                                            <div class="col" style="vertical-align: middle;font-size: 12px;">
+                                                q8h
+                                            </div>
+                                            <div class="col" style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                                10/29
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="tab-pane" id="Imaging" role="tabpanel" aria-labelledby="Imaging-tab">
+                    <div class="container" style="padding: 0.2rem;max-height:155px">
+                        <table class="table table-striped" style="line-height: 10px;text-align: center;font-family: Arial;">
+                            <thead style="color: rgba(0, 118, 255, 1);font-size: 12px;text-align: left;
+                            font-family: PingFangSC-regular; background-color: #80BEF5;vertical-align:middle;">
+                            <tr>
+                                <th  scope="col" style="font-weight:bold;vertical-align:middle;
+                                line-height: 10px;line-height: 20px;font-size: 20px;color:black;" colspan="5">
+                                    CRITICAL VALUE
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:70%;color:black;background-color:white;">
+                                    CONCLUSION
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:30%;color:black;background-color:white;">
+                                    LINK
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for Conclusion, Name , FileCode_1 in Imaging_DataList1 %}
+                            <tr>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">
+                                    {{Conclusion}}
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary ellipsis" class="btn btn-primary" href="{% url 'PHR:ImagingFile' FileCode_1 %}" style="line-height: 0.5;
+                                    font-size: 12px;width:100%;    max-width: 50%;background-color:#BD3124;">{{Name}}</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">Emphysema</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{% url 'PHR:ImagingFile' FileCode %}" style="line-height: 0.5;
+                                    font-size: 12px;width:100%;background-color:#BD3124;">
+                                        CT 12-15
+                                    </a>
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col"></div>
+                    </div>
+                    <div class="container" style="padding: 0.2rem;max-height:155px">
+                        <table class="table table-striped" style="line-height: 10px;text-align: center;font-family: Arial;">
+                            <thead style="color: rgba(0, 118, 255, 1);font-size: 12px;text-align: left;
+                            font-family: PingFangSC-regular; background-color: #80BEF5;vertical-align:middle;">
+                            <tr>
+                                <th  scope="col" style="font-weight:bold;vertical-align:middle;
+                                line-height: 10px;line-height: 20px;font-size: 20px;color:black;" colspan="5">
+                                    Imaging Report
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:70%;color:black;background-color:white;">
+                                    File Name
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:30%;color:black;background-color:white;">
+                                    LINK
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for Name, FileCode_1 in Imaging_DataList2 %}
+                            <tr>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">
+                                    {{Name}}
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="{% url 'PHR:ImagingFile' FileCode_1 %}" style="line-height: 0.5;
+                                    font-size: 12px;width:100%;background-color:#BD3124;">Link</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">CT 12-15</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{% url 'PHR:ImagingFile' FileCode %}" style="line-height: 0.5;
+                                    font-size: 12px;width:100%;background-color:#BD3124;">
+                                        Link
+                                    </a>
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="Laboratory" role="tabpanel" aria-labelledby="Laboratory-tab">
+                    <div class="container" style="padding: 0.2rem;max-height:155px;">
+                        <table class="table table-striped" style="line-height: 10px;text-align: center;font-family: Arial;">
+                            <thead style="color: rgba(0, 118, 255, 1);font-size: 12px;text-align: left;
+                            font-family: PingFangSC-regular; background-color: #80BEF5;vertical-align:middle;">
+                            <tr>
+                                <th  scope="col" style="font-weight:bold;vertical-align:middle;
+                                line-height: 10px;line-height: 20px;font-size: 20px;color:black;" colspan="5">
+                                    CRITICAL VALUE
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:25%;color:black;background-color:white;">
+                                    ITEM
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:25%;color:black;background-color:white;">
+                                    RESULT
+                                </th>
+
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:25%;color:black;background-color:white;">
+                                    ABNORMAL
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:25%;color:black;background-color:white;">
+                                    RANGE
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:25%;color:black;background-color:white;">
+                                    LINK
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for Item,Result,Abnormal,Range,FileCode_1 in Laboratory_DataList1 %}
+                            <tr>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">
+                                    {{Item}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">
+                                    {{Result}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;">
+                                    {{Abnormal}}
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">
+                                    {{Range}}
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="{% url 'PHR:LaboratoryFile' FileCode_1 %}" style="line-height: 0.5;
+                                    font-size: 12px;width:100%;background-color:#BD3124;">
+                                        Link
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">
+                                    Uric Acid
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">
+                                    528.6 mmol/L
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;color:red;">
+                                    ↑
+                                </td>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">
+                                    155.0-357.0 mmol/L
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="{% url 'PHR:LaboratoryFile' FileCode %}" style="line-height: 0.5;
+                                    font-size: 12px;width:100%;background-color:#BD3124;">
+                                        Biochemical
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col"></div>
+                    </div>
+                    <div class="container" style="padding: 0.2rem;max-height:155px">
+                        <table class="table table-striped" style="line-height: 10px;text-align: center;font-family: Arial;">
+                            <thead style="color: rgba(0, 118, 255, 1);font-size: 12px;text-align: left;
+                            font-family: PingFangSC-regular; background-color: #80BEF5;vertical-align:middle;">
+                            <tr>
+                                <th  scope="col" style="font-weight:bold;vertical-align:middle;
+                                line-height: 10px;line-height: 20px;font-size: 20px;color:black;" colspan="5">
+                                    Laboratory Report
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:70%;color:black;background-color:white;">
+                                    File Name
+                                </th>
+                                <th scope="col" style="font-weight:normal;vertical-align:middle;
+                                line-height: 10px;width:30%;color:black;background-color:white;">
+                                    LINK
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for Name, FileCode_1 in Laboratory_DataList2 %}
+                            <tr>
+                                <td style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">
+                                    {{Name}}
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="{% url 'PHR:LaboratoryFile' FileCode_1 %}" style="line-height: 0.5;
+                                    font-size: 12px;width:100%;background-color:#BD3124;">Link</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td  style="vertical-align: middle;font-size: 12px;word-break: break-all;text-align:left;">CT 12-15</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{% url 'PHR:LaboratoryFile' FileCode %}" style="line-height: 0.5;
+                                    font-size: 12px;width:100%;background-color:#BD3124;">
+                                        Link
+                                    </a>
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script type="text/javascript">
+            var RecordType = "{{ RecordType|safe }}";
+            if (RecordType =="Allergies"){
+                $('#Allergies-tab').tab('show');
+            } else if (RecordType =="VitalSigns"){
+                $('#VitalSigns-tab').tab('show');
+            } else if (RecordType =="Medications"){
+                $('#Medication-tab').tab('show');
+            } else if (RecordType =="Imaging"){
+                $('#Imaging-tab').tab('show');
+            } else if (RecordType =="Laboratory"){
+                $('#Laboratory-tab').tab('show');
+            }
+            var Legend_Data = {{ Legend_Data | safe }};
+
+            var PulseRate_Data1 = {{ PulseRate_Data1 | safe}};
+            var PulseRate_Data2 = {{ PulseRate_Data2 | safe}};
+            var PulseRate_Data3 = {{ PulseRate_Data3 | safe}};
+            var BloodPressureUp_Data1 = {{ BloodPressureUp_Data1 | safe}};
+            var BloodPressureUp_Data2 = {{ BloodPressureUp_Data2 | safe}};
+            var BloodPressureUp_Data3 = {{ BloodPressureUp_Data3 | safe}};
+            var BloodPressureDown_Data1 = {{ BloodPressureDown_Data1 | safe}};
+            var BloodPressureDown_Data2 = {{ BloodPressureDown_Data2 | safe}};
+            var BloodPressureDown_Data3 = {{ BloodPressureDown_Data3 | safe}};
+            var Respiration_Data1 = {{ Respiration_Data1 | safe}};
+            var Respiration_Data2 = {{ Respiration_Data2 | safe}};
+            var Respiration_Data3 = {{ Respiration_Data3 | safe}};
+            var Temperature_Data1 = {{ Temperature_Data1 | safe}};
+            var Temperature_Data2 = {{ Temperature_Data2 | safe}};
+            var Temperature_Data3 = {{ Temperature_Data3 | safe}};
+            var myChart1 = null,
+              myChart2 = null,
+              myChart3 = null
+            
+               {% comment %} height:165,
+                width:324 {% endcomment %}
+         
+
+            $("#days-tab").click(function(){
+                var option1 = {
+                    tooltip:{
+                        trigger: 'axis'
+                        },
+                    legend:{
+                        data:Legend_Data,
+                        textStyle: {
+                            fontSize: 10,
+                            },
+                        itemHeight: 10,
+                        top:"5%"
+                        },
+                    grid:{
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                        },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: ['10%','20%']
+                        },
+                    yAxis:[
+                    {
+                        type: 'value',
+                        axisLabel:{
+                            formatter: "{value}"
+                            }
+                        },{
+                        type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name:Legend_Data[0],
+                            type:'line',
+                            yAxisIndex: 1,
+                            color:'#d43f3a',
+                            itemStyle:{
+                                normal:{
+                                    lineStyle:{
+                                        type: 'dotted'
+                                        }
+                                    }
+                                },
+                            data: Temperature_Data1
+                        },
+                        {
+                            name:Legend_Data[1],
+                            type:'line',
+                            yAxisIndex: 0,
+                            color:'#00ff00',
+                            data: PulseRate_Data1
+                        },
+                        {
+                            name:Legend_Data[2],
+                            type:'line',
+                            yAxisIndex: 1,
+                            color:'#7a7a7a',
+                            itemStyle:{
+                                normal:{
+                                    lineStyle:{
+                                        type: 'dotted'
+                                        }
+                                    }
+                                },
+                            data: Respiration_Data1
+                        },
+                        {
+                            name:Legend_Data[3],
+                            type:'line',
+                            yAxisIndex: 0,
+                            color:'#ffff4d',
+                            data: BloodPressureUp_Data1
+                        },
+                        {
+                            name:Legend_Data[4],
+                            type:'line',
+                            yAxisIndex: 0,
+                            color:'#0000ff',
+                            data: BloodPressureDown_Data1
+                        }
+                    ],
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'inside',
+                            xAxisIndex: [0],
+                            minSpan: 10
+                        }
+                    ]
+                };
+                myChart1.setOption(option1)
+            });
+            $("#months-tab").click(function(){
+                var option2 = {
+                    tooltip:{
+                        trigger: 'axis'
+                        },
+                    legend:{
+                        data:Legend_Data,
+                        textStyle: {
+                            fontSize: 10,
+                            },
+                        itemHeight: 10,
+                        top:"5%"
+                        },
+                    grid:{
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                        },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: ['10%','20%']
+                        },
+                    yAxis:[{
+                        type: 'value',
+                        axisLabel:{
+                            formatter: "{value}"
+                            }
+                        },{
+                        type: 'value'
+                        }],
+                    series: [
+                        {
+                            name:Legend_Data[0],
+                            type:'line',
+                            yAxisIndex: 1,
+                            color:'#d43f3a',
+                            itemStyle:{
+                                normal:{
+                                    lineStyle:{
+                                        type: 'dotted'
+                                        }
+                                    }
+                                },
+                            data: Temperature_Data2
+                        },
+                        {
+                            name:Legend_Data[1],
+                            type:'line',
+                            yAxisIndex: 0,
+                            color:'#00ff00',
+                            data: PulseRate_Data2
+                        },
+                        {
+                            name:Legend_Data[2],
+                            type:'line',
+                            yAxisIndex: 1,
+                            color:'#7a7a7a',
+                            itemStyle:{
+                                normal:{
+                                    lineStyle:{
+                                        type: 'dotted'
+                                        }
+                                    }
+                                },
+                            data: Respiration_Data2
+                        },
+                        {
+                            name:Legend_Data[3],
+                            type:'line',
+                            yAxisIndex: 0,
+                            color:'#ffff4d',
+                            data: BloodPressureUp_Data2
+                        },
+                        {
+                            name:Legend_Data[4],
+                            type:'line',
+                            yAxisIndex: 0,
+                            color:'#0000ff',
+                            data: BloodPressureDown_Data2
+                        }
+                    ],
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'inside',
+                            xAxisIndex: [0],
+                            minSpan: 10
+                        }
+                    ]
+                };
+                myChart2.setOption(option2)
+            })
+            $("#years-tab").click(function(){
+                var option3 = {
+                    tooltip:{
+                        trigger: 'axis'
+                        },
+                    legend:{
+                        data:Legend_Data,
+                        textStyle: {
+                            fontSize: 10,
+                            },
+                        itemHeight: 10,
+                        top:"5%"
+                        },
+                    grid:{
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                        },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: ['10%','20%']
+                        },
+                    yAxis:[{
+                        type: 'value',
+                        axisLabel:{
+                            formatter: "{value}"
+                            }
+                        },{
+                        type: 'value'
+                        }],
+                    series: [
+                        {
+                            name:Legend_Data[0],
+                            type:'line',
+                            yAxisIndex: 1,
+                            color:'#d43f3a',
+                            itemStyle:{
+                                normal:{
+                                    lineStyle:{
+                                        type: 'dotted'
+                                        }
+                                    }
+                                },
+                            data: Temperature_Data3
+                        },
+                        {
+                            name:Legend_Data[1],
+                            type:'line',
+                            yAxisIndex: 0,
+                            color:'#00ff00',
+                            data: PulseRate_Data3
+                        },
+                        {
+                            name:Legend_Data[2],
+                            type:'line',
+                            yAxisIndex: 1,
+                            color:'#7a7a7a',
+                            itemStyle:{
+                                normal:{
+                                    lineStyle:{
+                                        type: 'dotted'
+                                        }
+                                    }
+                                },
+                            data: Respiration_Data3
+                        },
+                        {
+                            name:Legend_Data[3],
+                            type:'line',
+                            yAxisIndex: 0,
+                            color:'#ffff4d',
+                            data: BloodPressureUp_Data3
+                        },
+                        {
+                            name:Legend_Data[4],
+                            type:'line',
+                            yAxisIndex: 0,
+                            color:'#0000ff',
+                            data: BloodPressureDown_Data3
+                        }
+                    ],
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'inside',
+                            xAxisIndex: [0],
+                            minSpan: 10
+                        }
+                    ]
+                };
+                myChart3.setOption(option3)
+                myChart3.resize();
+            })
+            window.addEventListener('resize', function() {
+                myChart1.resize();
+                myChart2.resize();
+                myChart3.resize();
+            });
+            $(document).ready(function(){
+              
+                const width = $('.container.card-top_wapper').width(),
+                height = $('.container.card-top_wapper').height()
+                const width1 = $('#echart-box').width(),
+                height1 = $('#echart-box').height()
+                console.log(123123,width,height,width1,height1)
+                myChart1 = echarts.init(document.getElementById('Graph1'),null,{
+                    width,
+                    height
+                  });
+                var option1 = {
+                  tooltip:{
+                      trigger: 'axis'
+                      },
+                  legend:{
+                      data:Legend_Data,
+                      textStyle: {
+                          fontSize: 10,
+                          },
+                      itemHeight: 10,
+                      top:"5%"
+                      },
+                  grid:{
+                      left: '3%',
+                      right: '4%',
+                      bottom: '3%',
+                      containLabel: true
+                      },
+                  xAxis: {
+                      type: 'category',
+                      boundaryGap: ['10%','20%']
+                      },
+                  yAxis:[{
+                      type: 'value',
+                      },{
+                      type: 'value'
+                      }],
+                  series: [
+                      {
+                          name:Legend_Data[0],
+                          type:'line',
+                          yAxisIndex: 1,
+                          color:'#d43f3a',
+                          itemStyle:{
+                              normal:{
+                                  lineStyle:{
+                                      type: 'dotted'
+                                      }
+                                  }
+                              },
+                          data: Temperature_Data1
+                      },
+                      {
+                          name:Legend_Data[1],
+                          type:'line',
+                          yAxisIndex: 0,
+                          color:'#00ff00',
+                          data: PulseRate_Data1
+                      },
+                      {
+                          name:Legend_Data[2],
+                          type:'line',
+                          yAxisIndex: 1,
+                          color:'#7a7a7a',
+                          itemStyle:{
+                              normal:{
+                                  lineStyle:{
+                                      type: 'dotted'
+                                      }
+                                  }
+                              },
+                          data: Respiration_Data1
+                      },
+                      {
+                          name:Legend_Data[3],
+                          type:'line',
+                          yAxisIndex: 0,
+                          color:'#ffff4d',
+                          data: BloodPressureUp_Data1
+                      },
+                      {
+                          name:Legend_Data[4],
+                          type:'line',
+                          color:'#0000ff',
+                          data: BloodPressureDown_Data1
+                      }
+                  ],
+                  dataZoom: [
+                      {
+                          id: 'dataZoomX',
+                          type: 'inside',
+                          xAxisIndex: [0],
+                          minSpan: 10
+                      }
+                  ]
+                };
+                myChart1.setOption(option1)
+                myChart2 = echarts.init(document.getElementById('Graph2'), null, {
+                  width,
+                  height
+                });
+                myChart3 = echarts.init(document.getElementById('Graph3'), null, {
+                  width,
+                  height
+                });
+            })
+        </script>
+    </body>
+</html>

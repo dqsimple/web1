@@ -1,0 +1,5 @@
+.gitignore
+settings.py
+.idea
+db.sqlite3
+web/__pycache__/

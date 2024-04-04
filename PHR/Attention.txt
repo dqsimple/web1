@@ -1,0 +1,1 @@
+Change function "FHIRSearch" in fhirsearch.py to include more resources

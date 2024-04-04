@@ -1,0 +1,489 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- 上述meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <!-- Bootstrap CSS -->
+        <!-- <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+
+        <link href="{% static 'index/css/index.css' %}" rel="stylesheet"/>
+        <style>
+
+            .button:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            .nav-link.active{
+                color: #fff;
+                background-color: #1684FC;
+            }
+            .nav-link{
+                color: #1684FC;
+                border-radius: 4px 4px 4px 4px;
+                background-color: rgba(255, 255, 255, 1);
+                border: 1px solid rgba(22, 132, 252, 1);
+            }
+            .back:hover{
+                color:#fff;
+                background-color:#b3d7ff;
+                border-color:#b3d7ff;
+                text-decoration: none;
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: rgba(247, 247, 247, 0.8);
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+
+        </style>
+        <style>
+          html,body{
+            width100%;
+            height:100%;
+          }
+          body{
+            display:flex;
+            flex-direction:column;
+          }
+          table{
+            color:#606266!important;
+            }
+          .row{
+            padding:0;
+            margin:0;
+          }
+          .button_wapper{
+            padding: 0;
+            padding-right: 0.8rem;
+            display: flex;
+            align-items: center;
+          }
+          .title_wwapper{
+            flex:1;
+          }
+          .dropdown button{
+            background-color: rgba(233, 157, 66, 1);
+            color: rgba(255, 255, 255, 1);
+            font-size: 12px;
+            text-align: left;
+            box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.4);
+            font-family: Arial;
+            padding: 0.02rem 0.6rem;
+          }
+          .table_wapperr{
+            flex:5;
+          }
+          .table_wapper tbody{
+            overflow: scroll;
+            height: 100%;
+          }
+          .table-striped thead {
+            color: #909399!important;
+           
+          }
+          .table-striped thead th{
+            font-size: 0.8rem;
+          }
+          .nav{
+            padding-top: 1rem;
+          }
+          .nav button{
+            width: auto!important;
+            border-radius: 0.2rem;
+            font-size: 0.6rem;
+            text-align: center;
+            font-family: Arial;
+            border: 1px solid rgba(187, 187, 187, 1);
+            padding: 0.2rem 0.6rem;
+            border-color:#79bbff;
+          }
+          .nav-link{
+            color:#79bbff;
+          }
+          .nav-link.active{
+            background-color: #79bbff!important;
+          }
+          .echart_wwapper{
+            flex:4;
+            display: flex;
+            flex-direction: column;
+          }
+          #Graph1,#Graph2,#Graph3{
+            min-height: 12rem;
+            width:100%;
+          }
+          .echart_wwapper .tab-content{
+            flex: auto;
+          }
+          .echart_wwapper .tab-content .tab-pane{
+            height: 100%;
+          }
+          .echart_wwapper .tab-content .tab-pane .row{
+            height: 100%;
+          }
+          .echart_wwapper .tab-content .tab-pane .row .col{
+            padding: 0;
+          }
+        </style>
+        <title>Weight Record</title>
+    </head>
+    <body style="overflow-x:hidden;">
+        <ul>
+            <li><a href="/PHR/index/" class="back">< Back</a></li>
+        </ul>
+        <div class="container title_wwapper" title_wwapper style="">
+            <div class="row">
+                <div class="col-3" style="text-align: center;">
+
+                </div>
+                <div class="col-6" style="text-align: center;padding: 0px;">
+                    <div class="" style="border-bottom: solid 1px;color: rgba(119, 40, 245, 1);font-size: 36px;
+                    text-align: center;font-family: PingFangSC-semiBold;line-height: 55px;">
+                        Weight
+                    </div>
+                </div>
+                <div class="col-3 button_wapper" >
+                    <div class="dropdown" style="margin-top: 20%;">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                Records
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" style="">
+                                <a class="dropdown-item" href="/PHR/edit/" style="font-size: 12px;">New record</a>
+                                <a class="dropdown-item" href="/PHR/Height_Record/" style="font-size: 12px;">Height</a>
+                                <a class="dropdown-item" href="/PHR/Weight_Record/" style="font-size: 12px;">Weight</a>
+                                <a class="dropdown-item" href="/PHR/Temperature_Record/" style="font-size: 12px;">Temperature</a>
+                                <a class="dropdown-item" href="/PHR/Steps_Record/" style="font-size: 12px;">Steps</a>
+                                <a class="dropdown-item" href="/PHR/BMI_Record/" style="font-size: 12px;">BMI</a>
+                                <a class="dropdown-item" href="/PHR/BloodPressure_Record/" style="font-size: 12px;">Blood Pressure</a>
+                                <a class="dropdown-item" href="/PHR/HeartRate_Record/" style="font-size: 12px;">Heart Rate</a>
+                                <a class="dropdown-item" href="/PHR/Respiration_Record/" style="font-size: 12px;">Respiration</a>
+                                <a class="dropdown-item" href="/PHR/Smoking_Record/" style="font-size: 12px;">Smoking</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="containe table_wapperr" style="">
+            <div class="row" style="line-height: 29px;border-radius: 4px 4px 4px 4px;background-color: rgba(252, 202, 0, 1);
+                color: rgba(38, 32, 28, 1);font-size: 20px;text-align: left;font-family: Arial;">
+                  <div class="col" style="font-weight:bold;color:#fff">
+                      1. Daily Data Records
+                  </div>
+            </div>
+            <table class="table table-striped" style="line-height: 1px;font-size: 12px;text-align: center;font-family: Arial;">
+                <thead style="color: rgba(0, 118, 255, 1);font-size: 18px;text-align: left;font-family: PingFangSC-regular;">
+                <tr>
+                    <th scope="col" width="60%" style="font-weight:normal;">DATE</th>
+                    <th scope="col" width="40%" style="font-weight:normal;">Weight</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for t,d in Weight_DataList2 %}
+                <tr>
+                    <td>{{t}}</td>
+                    <td>{{d}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="container echart_wwapper" style="padding: 0">
+            <div class="row" style="line-height: 29px;border-radius: 4px 4px 4px 4px;background-color: rgba(64, 171, 209, 1);
+                color: rgba(38, 32, 28, 1);font-size: 20px;text-align: left;font-family: Arial;">
+                  <div class="col" style="font-weight:bold;color:#fff">
+                      2. Historical Trend
+                  </div>
+            </div>
+            <nav>
+                <div class="nav nav-pills mb-3" id="graph-tab" role="tablist" style="">
+                    <button type="button" class="nav-link active" id="days-tab" data-toggle="pill" data-target="#days" roll="tab" aria-controls="days" aria-selected="true"
+                    style="margin-left:auto">
+                        Days
+                    </button>
+                    <button type="button" class="nav-link" id="months-tab" data-toggle="pill" data-target="#months" roll="tab" aria-controls="months" aria-selected="false"
+                     style="">
+                        Months
+                    </button>
+                    <button type="button" class="nav-link" id="years-tab" data-toggle="pill" data-target="#years" roll="tab" aria-controls="years" aria-selected="false"
+                     style="margin-right:auto">
+                        Years
+                    </button>
+                </div>
+            </nav>
+            <div class="tab-content" id="graph-tabContent">
+                <div class="tab-pane fade show active" id="days" role="tabpanel" aria-labelledby="days-tab">
+                    <div class="row" style="width: 100%;padding:2%;margin-left: auto;margin-right: auto;">
+                        <div class="col" style="width:100%">
+                            <div id = "Graph1" style="width: 100%; height:165px;margin: auto;bottom:8px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="months" role="tabpanel" aria-labelledby="months-tab">
+                    <div class="row" style="width: 100%;padding:2%;margin-left: auto;    margin-right: auto;">
+                        <div class="col" style="width:100%">
+                            <div id = "Graph2" style="width: 100%; height:165px;margin: auto;bottom:8px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="years" role="tabpanel" aria-labelledby="years-tab">
+                    <div class="row" style="width: 100%;padding:2%;margin-left: auto;    margin-right: auto;">
+                        <div class="col" style="width:100%">
+                            <div id = "Graph3" style="width: 100%; height:165px;margin: auto;bottom:8px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script type="text/javascript">
+            var Legend_Data = {{ Legend_Data | safe }};
+            var Weight_DataList5 = {{ Weight_DataList5 | safe}};
+            var Weight_DataList3 = {{ Weight_DataList3 | safe}};
+            var Weight_DataList4 = {{ Weight_DataList4 | safe}};
+            var myChart1 = echarts.init(document.getElementById('Graph1'), null, {
+        
+            });
+            myChart2 = null,
+            myChart3 = null
+            var option1 = {
+                tooltip:{
+                    trigger: 'axis'
+                    },
+                legend:{
+                    data:Legend_Data,
+                    textStyle: {
+                        fontSize: 10,
+                        },
+                    itemHeight: 10,
+                    top:"5%"
+                    },
+                grid:{
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                    },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: ['10%','20%']
+                    },
+                yAxis:[{
+                    type: 'value',
+                    axisLabel:{
+                        formatter: "{value} kg"
+                        }
+                    },{
+                    type: 'value'
+                    }],
+                series: [
+                    {
+                        name:Legend_Data[0],
+                        type:'line',
+                        color:'##1684FC',
+                        data: Weight_DataList3
+                    }
+                ],
+                dataZoom: [
+                    {
+                        id: 'dataZoomX',
+                        type: 'inside',
+                        xAxisIndex: [0],
+                        minSpan: 10
+                    }
+                ]
+            };
+            myChart1.setOption(option1)
+
+            $("#days-tab").click(function(){
+                var option1 = {
+                    tooltip:{
+                        trigger: 'axis'
+                        },
+                    legend:{
+                        data:Legend_Data,
+                        textStyle: {
+                            fontSize: 10,
+                            },
+                        itemHeight: 10,
+                        top:"5%"
+                        },
+                    grid:{
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                        },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: ['10%','20%']
+                        },
+                    yAxis:[{
+                        type: 'value',
+                        axisLabel:{
+                            formatter: "{value} cm"
+                            }
+                        },{
+                        type: 'value'
+                        }],
+                    series: [
+                        {
+                            name:Legend_Data[0],
+                            type:'line',
+                            color:'##1684FC',
+                            data: Weight_DataList3
+                        }
+                    ],
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'inside',
+                            xAxisIndex: [0],
+                            minSpan: 10
+                        }
+                    ]
+                };
+                myChart1.setOption(option1)
+            });
+            $("#months-tab").click(function(){
+                var option2 = {
+                    tooltip:{
+                        trigger: 'axis'
+                        },
+                    legend:{
+                        data:Legend_Data,
+                        textStyle: {
+                            fontSize: 10,
+                            },
+                        itemHeight: 10,
+                        top:"5%"
+                        },
+                    grid:{
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                        },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: ['10%','20%']
+                        },
+                    yAxis:[{
+                        type: 'value',
+                        axisLabel:{
+                            formatter: "{value} kg"
+                            }
+                        },{
+                        type: 'value'
+                        }],
+                    series: [
+                        {
+                            name:Legend_Data[0],
+                            type:'line',
+                            color:'##1684FC',
+                            data: Weight_DataList4
+                        }
+                    ],
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'inside',
+                            xAxisIndex: [0],
+                            minSpan: 10
+                        }
+                    ]
+                };
+                myChart2.setOption(option2)
+            })
+            $("#years-tab").click(function(){
+                var option3 = {
+                    tooltip:{
+                        trigger: 'axis'
+                        },
+                    legend:{
+                        data:Legend_Data,
+                        textStyle: {
+                            fontSize: 10,
+                            },
+                        itemHeight: 10,
+                        top:"5%"
+                        },
+                    grid:{
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                        },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: ['10%','20%']
+                        },
+                    yAxis:[{
+                        type: 'value',
+                        axisLabel:{
+                            formatter: "{value} kg"
+                            }
+                        },{
+                        type: 'value'
+                        }],
+                    series: [
+                        {
+                            name:Legend_Data[0],
+                            type:'line',
+                            color:'##1684FC',
+                            data: Weight_DataList5
+                        }
+                    ],
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'inside',
+                            xAxisIndex: [0],
+                            minSpan: 10
+                        }
+                    ]
+                };
+                myChart3.setOption(option3)
+                myChart3.resize();
+            })
+            window.addEventListener('resize', function() {
+                myChart1.resize();
+                myChart2.resize();
+                myChart3.resize();
+            });
+            $(document).ready(function(){
+                const width = $('#Graph1>div').width(),
+                  height = $('#Graph1>div').height()
+                myChart2 = echarts.init(document.getElementById('Graph2'), null, {
+                  width,
+                  height
+                });
+                myChart3 = echarts.init(document.getElementById('Graph3'), null, {
+                  width,
+                  height
+                });
+            })
+        </script>
+    </body>
+</html>

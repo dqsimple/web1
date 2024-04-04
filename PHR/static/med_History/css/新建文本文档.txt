@@ -1,0 +1,2 @@
+med_History比med_History_1少了.row{;margin-right:-15px;margin-left:-15px}
+和 .container{padding-right:15px;padding-left:15px;}

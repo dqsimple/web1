@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- 上述meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <!-- Bootstrap CSS -->
+        <!-- <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+
+        <link href="{% static 'index/css/index.css' %}" rel="stylesheet"/>
+        <style>
+            .button:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: rgba(247, 247, 247, 0.8);
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            /*
+            a,a:hover,a:active,a:visited,a:link,a:focus{
+                -webkit-tap-highlight-color:rgba(0,0,0,0);
+                -webkit-tap-highlight-color: transparent;
+                outline:none;
+                background: none;
+                text-decoration: none;
+            }background:#0000ff61;
+            */
+
+
+            .back:hover{
+                color:#fff;
+                background-color:#b3d7ff;
+                border-color:#b3d7ff;
+                text-decoration: none;
+            }
+            .table td, .table th {
+                padding: 0.35rem;
+            }
+            a:hover{
+                color:#fff;
+                background-color:#b3d7ff;
+                border-color:#b3d7ff;
+                text-decoration: none;
+            }
+        </style>
+        <style>
+          .imaging_wapper thead{
+            color: #909399!important;
+            font-size:14px!important;
+          }
+          .operate_wapper td{
+            line-height: 0.5;
+            font-size: 12px;
+            display: inline-block;
+          }
+          .btn-primary{
+            line-height:auto;
+            padding: 0.3rem 0.6rem;
+          }
+          table{
+          color:#606266!important;
+          }
+          
+        </style>
+        <title>Allergies History</title>
+    </head>
+    <body>
+        <ul>
+            <li><a href="/PHR/index/" class="back">< Back</a></li>
+            <li style="margin-left: 15%;">
+                <h1 style="display: block;text-align: center;
+                    padding: 14px 16px;color:#030303;font-size: 16px;font-family: Helvetica-bold;float: none;
+                    font-weight: bold;">
+                    Allergy
+                </h1>
+            </li>
+        </ul>
+
+        <div class="container imaging_wapper" style="padding: 0.2rem;overflow-y: auto;">
+            <table class="table table-striped" style="line-height: 10px;font-size: 12px;text-align: center;font-family: Arial;">
+                <thead style="color: rgba(0, 118, 255, 1);font-size: 15px;text-align: left;font-family: PingFangSC-regular;">
+                <tr>
+                    <th scope="col" style="font-weight:normal;
+                    line-height: 18px;width:20%;border-right: 1px solid #ebeef5;">
+                        Allergy
+                    </th>
+                    <th scope="col" style="font-weight:normal;
+                    line-height: 18px;width:10%;border-right: 1px solid #ebeef5;">
+                        Serverity
+                    </th>
+                    <th scope="col" style="font-weight:normal;
+                    line-height: 18px;width:30%;border-right: 1px solid #ebeef5;">
+                        DATE
+                    </th>
+                    <th scope="col" style="font-weight:normal;
+                    line-height: 18px;width:40%;border-right: 1px solid #ebeef5;">
+                        Reaction
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for name,Serverity,t,Reaction in Allergies_DataList1 %}
+                <tr>
+                    <td style="vertical-align: middle;font-size: 12px;word-break: break-word;">
+                        {{name}}
+                    </td>
+                    <td style="vertical-align: middle;font-size: 12px;word-break: break-word;">
+                        {{Serverity}}
+                    </td>
+                    <td style="vertical-align: middle;font-size: 12px;word-break: break-word;">
+                        {{t}}
+                    </td>
+                    <td style="vertical-align: middle;font-size: 12px;word-break: break-word;">
+                        {{Reaction}}
+                    </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                        None
+                    </td>
+                    <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                        None
+                    </td>
+                    <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                        None
+                    </td>
+                    <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                        None
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script type="text/javascript">
+        </script>
+    </body>
+</html>

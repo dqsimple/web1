@@ -1,0 +1,25 @@
+﻿WBC,6,10^9/L,4.5-11.0,White Blood Cell
+RBC,5.5,million cells/mcL,Male: 4.7-6.1 Female: 4.2-5.4,red blood cell
+Hb,15,g/dL,Male: 13.8-17.2 Female: 12.1-15.1,Hemoglobin
+Plt,300,10^9/L,150-400,platelet
+,,,,
+AST,17,units/L,Male: 14-20 Female: 10-36,Aspartate Transaminase
+ALT,40,units/L,7-56,Alanine Transaminase
+Tbil,0.8,mg/dL,0.1-1.2,Total bilirubin
+Dbil,0.2,mg/dL,<0.3,Direct (also called conjugated) bilirubin
+ALP,100,U/L,44-147,Alkaline phosphatase
+γGTP,40,U/L,Male: ≤70 Female ≤30,
+BUN,15,mg/dL,10--20,Blood Urea Nitrogen
+Cr,1,mg/dL,Male: 0.7-1.3 Female 0.6-1.1,creatinine
+TP,7,g/dL,6.0-8.3,Total protein
+Alb,4,g/dL,3.4-5.4,Albumin blood
+Na,54,mmol/L,22-74,serum sodium
+K,4,mmol/L,Adult/Elderly: 3.5-5.0 Child:3.4-4.7 Infant:4.1-5.3 Newborn:3.9-5.9,Potassium
+Cl,102,mmol/L,98-106,chloride 
+TG,100,mg/dL,≤150,triglycerides
+Tchol,4.5,mmol/L,3.9-5.5,Total cholesterol
+LDL,79,mg/dL,<100,Low-Density Lipoprotein Cholesterol
+HDL,60,mg/dL,>40,High density liptein cholesterol
+CPK,50,mcg/L,10-120,Creatine phosphokinase
+CRP,3,mg/L,<10,C-reactive protein
+BNP,58,pg/mL,<100,B-Type Natriuretic Peptide

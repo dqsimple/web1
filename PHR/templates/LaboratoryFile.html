@@ -1,0 +1,370 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- 上述meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <link href="{% static 'index/css/index.css' %}" rel="stylesheet" />
+    <style>
+        .nav-link:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
+        .back:hover {
+            color: #fff;
+            background-color: #b3d7ff;
+            border-color: #b3d7ff;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgba(247, 247, 247, 0.8);
+        }
+
+        li {
+            float: left;
+        }
+
+        .table td,
+        .table th {
+            padding: 0.15rem;
+        }
+
+        li a {
+            display: block;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .col-3 {
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+
+        .nav-link {
+            color: #007BFF;
+            background-color: white;
+        }
+    </style>
+    <style>
+        .row {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 0;
+        }
+
+        .container button {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            border: 1px solid #c0c4cc;
+        }
+
+        #p-group {
+            justify-content: center;
+            padding: 0.6rem 0;
+        }
+
+        .gip {
+            box-sizing: border-box;
+            width: 100%;
+            margin: 0 1rem;
+            height: 0.1rem;
+            background-color: #dcdfe6;
+        }
+
+        .image_wapper {
+            padding: 1rem;
+            width: 100%;
+        }
+
+        .image_wapper img {
+            width: 100%;
+            object-fit: contain;
+        }
+
+        table {
+            color: #606266 !important;
+        }
+
+        .table td,
+        .table th {
+            padding: 0.35rem;
+        }
+    </style>
+    <title>Laboratory File</title>
+</head>
+
+<body style="">
+    <ul>
+        <!-- <li><a href="{% url 'PHR:Visit' Encounter %}" class="back">
+                < Back</a>
+        </li> -->
+        <li><a  class="back" onclick="window.history.go(-1)">
+                < Back</a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-4"></div>
+
+    </div>
+    <div class="container" style="padding-right: 10px;padding-left: 10px;">
+        {% comment %} <ul id="p-group" class="nav nav-pills mb-3" role="tablist"
+            style="text-align:center;background-color:white;">
+            <li class="nav-item" role="presentation" style="margin-left: auto;">
+                <button class="nav-link" id="PDF-tab" data-toggle="tab" data-target="#Table" role="tab"
+                    aria-controls="Table" aria-selected="true" style="width:71px;font-size: 12px;
+                            text-align: center;font-family: Arial;padding-left: 0px;padding-right: 0px;
+                            line-height: 10px;border-radius: 5px;border: 1px solid rgba(187, 187, 187, 1);">
+                    Report Table
+                </button>
+            </li>
+            <li class="nav-item" role="presentation" style="margin-left: auto;">
+                <button class="nav-link active" id="PDF-tab" data-toggle="tab" data-target="#PDF" role="tab"
+                    aria-controls="PDF" aria-selected="true" style="width:71px;font-size: 12px;
+                            text-align: center;font-family: Arial;padding-left: 0px;padding-right: 0px;
+                            line-height: 10px;border-radius: 5px;border: 1px solid rgba(187, 187, 187, 1);">
+                    PDF Report
+                </button>
+            </li>
+            <li class="nav-item" role="presentation" style="margin-right: auto;">
+                <button class="nav-link" id="Trend-tab" data-toggle="tab" data-target="#Trend" type="button" role="tab"
+                    aria-controls="Trend" aria-selected="false" style="width:102px;font-size: 12px;
+                            text-align: center;font-family: Arial;padding-left: 0px;padding-right: 0px;
+                            line-height: 10px;border-radius: 5px;border: 1px solid rgba(187, 187, 187, 1);">
+                    Trend Comparison
+                </button>
+            </li>
+        </ul> {% endcomment %}
+        <ul id="p-group" class="nav nav-pills mb-3" role="tablist" style="background-color:white;">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="Report-tab" data-toggle="tab" data-target="#ReportTable" type="button"
+                    role="tab" aria-controls="ReportTable" aria-selected="false">Report Table</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="PDF-tab" data-toggle="tab" data-target="#PDF" type="button"
+                    role="tab" aria-controls="PDF" aria-selected="true">PDF Report</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="Trend-tab" data-toggle="tab" data-target="#Trend" type="button" role="tab"
+                    aria-controls="Trend" aria-selected="false">Trend Comparison</button>
+            </li>
+        </ul>
+        <div class="gip"></div>
+        {% comment %} <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4" style="border-bottom: 1px solid #82848F; margin-top: 1rem;"></div>
+        </div> {% endcomment %}
+        <div class="tab-content" style="overflow-y: auto;width:100%;">
+            <div class="tab-content" style="overflow-y: auto;width:100%;">
+
+                <div class="tab-pane" id="ReportTable" role="tabpanel" aria-labelledby="Report-tab" style="">
+                    <div id="reportTableContainer" class="container" style="padding: 0.2rem;">
+                        <table class="table table-striped"
+                            style="line-height: 10px;font-size: 16px;text-align: center;font-family: Arial;">
+                            <thead
+                                style="color: rgba(0, 118, 255, 1);font-size: 14px;text-align: left;font-family: PingFangSC-regular;">
+                                <tr>
+                                    <th scope="col" style="font-weight:normal;
+                                        line-height: 18px;width:25%;border-right: 1px solid #ebeef5;">
+                                        ItemName
+                                    </th>
+                                    <th scope="col" style="font-weight:normal;
+                                        line-height: 18px;width:25%;border-right: 1px solid #ebeef5;">
+                                        LabResult
+                                    </th>
+                                    <th scope="col" style="font-weight:normal;
+                                        line-height: 18px;width:25%;border-right: 1px solid #ebeef5;">
+                                        ReferenceRange
+                                    </th>
+                                    <th scope="col" style="font-weight:normal;
+                                        line-height: 18px;width:25%;border-right: 1px solid #ebeef5;">
+                                        AbnormalFlag
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for reportData in ReportDatas %}
+                                <tr>
+                                    <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                        {{reportData.ItemName}}
+                                    </td>
+                                    <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                        {{reportData.LabResult}}
+                                    </td>
+                                    <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                        {{reportData.ReferenceRange}}
+                                    </td>
+                                    <td style="vertical-align: middle;font-size: 12px;word-break: break-all;">
+                                        {{reportData.AbnormalFlag}}
+                                    </td>
+
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane active" id="PDF" role="tabpanel" aria-labelledby="PDF-tab" style="">
+                    <div id="pdfContainer" class="container" style="padding: 0.2rem;">
+
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="Trend" role="tabpanel" aria-labelledby="Trend-tab">
+                    <div class="container" style="padding: 0.2rem;">
+                        <div id="checkboxes"></div>
+                        <div id="charts"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+        <script type="text/javascript">
+            var PDF_DataList = '{{ PDF_DataList | safe}}';
+            console.log(PDF_DataList);
+            console.log("1");
+            function pdfInit() {
+                if (PDF_DataList != "") {
+                    var binaryData = atob(PDF_DataList);
+                    var loadingTask = pdfjsLib.getDocument({ data: binaryData });
+                    loadingTask.promise.then(function (pdf) {
+                        var numPages = pdf.numPages;
+                        var container = document.getElementById("pdfContainer")
+                        // Loop through each page
+                        for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+                            pdf.getPage(pageNum).then(function (page) {
+                                var scale = 1;
+                                var viewport = page.getViewport({ scale: scale });
+
+                                // Create a new canvas for each page
+                                var canvas = document.createElement("canvas");
+                                container.appendChild(canvas);
+                                var context = canvas.getContext("2d");
+                                canvas.height = viewport.height;
+                                canvas.width = viewport.width;
+
+                                var renderContext = {
+                                    canvasContext: context,
+                                    viewport: viewport
+                                };
+                                page.render(renderContext);
+                            });
+                        }
+                    }).catch(function (reason) {
+                        console.error(reason);
+                    });
+
+                }
+            }
+
+            console.log("开始");
+            pdfInit();
+
+            var Legend_Data = {{ Legend_Data | safe }};
+            console.log(Legend_Data);
+            var Observation_Data = {{ Observation_Data | safe }};
+
+            Legend_Data.forEach(function (item) {
+                var checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.name = "items";
+                checkbox.value = item;
+                checkbox.id = item;
+                checkbox.checked = false;
+                var label = document.createElement('label');
+                label.htmlFor = item;
+                label.appendChild(document.createTextNode(item));
+                var container = document.getElementById("checkboxes");
+                container.style.display = 'flex';
+                container.style.flexWrap = 'wrap';
+                var container_checkbox = document.createElement('container');
+                container_checkbox.appendChild(checkbox);
+                container_checkbox.appendChild(label);
+                container.appendChild(container_checkbox);
+                container.appendChild(document.createElement("br"));
+            });
+            function renderCharts() {
+                var chartsDiv = document.getElementById('charts');
+                chartsDiv.innerHTML = ''; // 清空之前的图表
+
+                Legend_Data.forEach(function (item) {
+                    var checkbox = document.getElementById(item);
+                    if (checkbox.checked) {
+                        var div = document.createElement('div');
+                        div.style.width = "100%";
+                        div.style.height = "170px";
+                        chartsDiv.appendChild(div);
+
+                        var chart = echarts.init(div);
+                        var options = {
+                            title: {
+                                text: item
+                            },
+                            xAxis: {
+                                type: 'time'
+                            },
+                            yAxis: {
+                                type: 'value'
+                            },
+                            series: [{
+                                name: item,
+                                type: 'line',
+                                data: Observation_Data[item].map(function (value) {
+                                    return [value[0], value[1]];
+                                })
+                            }],
+                            dataZoom: [
+                                {
+                                    id: 'dataZoomX',
+                                    type: 'inside',
+                                    xAxisIndex: [0],
+                                    minSpan: 10
+                                }
+                            ]
+                        };
+                        chart.setOption(options);
+                        chart.resize();
+                    }
+                });
+            }
+
+            // 初始化图表
+            renderCharts();
+
+            // 当复选框状态改变时，重新渲染图表
+            document.getElementById('checkboxes').addEventListener('change', function () {
+                renderCharts();
+            });
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,527 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- 上述meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <!-- Bootstrap CSS -->
+        <!-- <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">-->
+
+        <!--<link href="{% static 'phr_change/css/change.css' %}" rel="stylesheet"/>-->
+        <link href="{% static 'index/css/index.css' %}" rel="stylesheet"/>
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #007bff;
+            }
+
+            li {
+                float: right;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover {
+                background-color: #111;
+            }
+
+            .card-text{
+                font-size: 12px;
+                text-align: left;
+                font-family: PingFangSC-medium;
+            }
+            .nav-tabs .nav-link{
+                border: 0px;
+            }
+            .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+                color:#1684DC;
+                background-color:#FFFFFF;
+            }
+            .nav-link{
+                border-radius: 18px;
+                color: rgba(51, 51, 51, 1);
+                font-size: 12px;
+                text-align: center;
+                font-family: Arial;
+                border: 1px solid rgba(187, 187, 187, 1);
+            }
+            .button:focus {
+                outline: none;
+                box-shadow: none;
+            }
+
+        </style>
+        <style>
+          html{
+            height: 100%;
+          }
+          body{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+          }
+          .row{
+            margin-right: -0;
+            margin-left: -0;
+          }
+          .col{
+            padding: 0;
+
+          }
+          .card-text{
+            padding: 0.2rem 0.4rem;
+          }
+          .col span{
+            font-size: 0.8rem;
+            font-weight: 300;
+          }
+          
+          .form-group{
+            width: 70%;
+            margin: 0 auto;
+            padding: 0.1rem 0 0.15rem 0;
+          }
+          .form-group input{
+            display: inline-block;
+            background-color: #e9e9eb!important;
+            border: none!important;
+          }
+          .form-group span{
+            font-size:0.7rem;
+          }
+          .form-control{
+            width: 75%;
+            height: 1.36rem;
+            padding: 0.1rem 0.75rem;
+            font-size: 0.8rem;
+          }
+          .smoking_wapper input{
+            width: 60%;
+          }
+          .no_margin{
+            margin:0;
+          }
+          .no_padding{
+            padding: 0;
+          }
+          .user-info_wapper {
+            background-color: #79bbff;
+            box-shadow: 0rem 0.13rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
+          }
+         
+          .user-info_wapper .card-body{
+            padding: 0.4em;
+          }
+          .user-info_wapper .user_wapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+          .user_wapper .card-text{
+            line-height: 1;
+            font-size: 0.6rem;
+            padding-bottom: 0.2rem;
+          }
+
+
+          .table_wapper{
+            padding: 0.8rem;
+            flex: 9;
+            border: none;
+          }
+          .table_wapper .card{
+            border-radius: 0.2rem;
+            
+          }
+          .form-NameForm{
+            height: 100%;
+            box-shadow: 0rem 0.13rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
+            border-radius: 0.2rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+          }
+          .form-NameForm .card{
+            flex: 9;
+            height: 100%;
+            border:none;
+          }
+          .form-NameForm .card .card-text{
+            color: #ffffffb3;
+            background-color: #95d475;
+            font-size: 0.8rem;
+            text-align: left;
+            font-family: PingFangSC-regular;
+            padding:0.2rem;
+
+           font-family: Arial;
+          }
+          .single_row span{
+            font-size: 0.7rem;
+            font-weight: 300;
+          }
+          .single_row .form-group{
+            padding: 0;
+            width: 100%;
+            padding: 0.3rem 0;
+            text-align:center;
+          }
+          .single_row .form-group input{
+            width: 30%;
+            padding: 0;
+          }
+       
+          .submit_wapper{
+            flex:1;
+          }
+          .submit_wapper a,.submit_wapper button{
+            padding: 0.2rem 0.6rem;
+            text-align: center;
+            border: none;
+          }
+        </style>
+        <title>Change</title>
+
+    </head>
+    <body>
+        <div class="container no_margin no_padding">
+            <div class="card user-info_wapper">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <img src="data:image/png;base64,{{ Photo }}" class="card-img" alt="Image" style="width: 7rem;">
+                        </div>
+                        <div class="col-7 user_wapper">
+                            <div class="card-text" style="font-weight: 800;">
+                                {{p1_Name}}
+                            </div>
+                            <div class="card-text">
+                                {{age}},{{p1.gender}},{{Height_Last}},{{Weight_Last}}
+                            </div>
+                            <div class="card-text">
+                                <span style="font-weight: 600;">Birth Date:</span> {{BirthDate}}
+                            </div>
+                            <div class="card-text">
+                                <span style="font-weight: 600;">Phone:</span> {{Phone}}
+                            </div>
+                            <div class="card-text">
+                                <span style="font-weight: 600;">City:</span> {{Address}}
+                            </div>
+                            <div class="card-text">
+                                <span style="font-weight: 600;">Email:</span> {{Email}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container table_wapper">
+            <form class="form-NameForm" action="." method="post" novalidate>
+                {% csrf_token %}
+
+                <!--{{ request.session.user_name }}
+                <div class="form-group">
+                    <div class="form-control"><span>Patient: </span></div>
+                </div>
+                -->
+                <div class="card">
+                    <div class="card-text" style="background-color: #909399;">
+                        Please enter your healthy daily data
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text" >
+                                DATA:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group"  >
+                                {{ phr_form.your_date }}
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-4"  >
+                            <div class="card-text" style="margin-top: 14%;color: rgba(16, 16, 16, 1);font-size: 14px;text-align: left;font-family: PingFangSC-regular;">
+
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text" >
+                                Height:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" >
+                            <div class="form-group"  >
+                                {{ phr_form.your_height }}
+                                <span>cm</span>
+                            </div>
+                            
+                        </div>
+                        
+                        {% comment %} <div class="col-4"  >
+                            <div class="card-text" style="margin-top: 14%;color: rgba(16, 16, 16, 1);font-size: 14px;text-align: left;font-family: PingFangSC-regular;">
+                                cm
+                            </div>
+                        </div>{% endcomment %}
+                    </div> 
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text"  >
+                                Weight:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"  >
+                            <div class="form-group"  >
+                                {{ phr_form.your_weight }}
+                                <span>kg</span>
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-4"  >
+                            <div class="card-text" style="margin-top: 14%;color: rgba(16, 16, 16, 1);font-size: 14px;text-align: left;font-family: PingFangSC-regular;">
+                                kg
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text"  >
+                                Temperature:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"  >
+                            <div class="form-group"  >
+                                {{ phr_form.your_temperature }}
+                                <span>℃</span>
+                            </div>
+                           
+                        </div>
+                        {% comment %} <div class="col-4"  >
+                            <div class="card-text" style="margin-top: 14%;color: rgba(16, 16, 16, 1);font-size: 14px;text-align: left;font-family: PingFangSC-regular;">
+                                ℃
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text"  >
+                                Steps:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"  >
+                            <div class="form-group"  >
+                                {{ phr_form.your_steps }}
+                                <span>/24h</span>
+                            </div>
+                           
+                        </div>
+                        {% comment %} <div class="col-4"  >
+                            <div class="card-text" style="margin-top: 14%;color: rgba(16, 16, 16, 1);font-size: 14px;text-align: left;font-family: PingFangSC-regular;">
+                                /24h
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text"  >
+                                BMI:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"  >
+                            <div class="form-group"  >
+                                {{ phr_form.your_BMI }}
+                                <span>kg/m2</span>
+                            </div>
+                           
+                        </div>
+                        {% comment %} <div class="col-4"  >
+                            <div class="card-text" style="margin-top: 14%;color: rgba(16, 16, 16, 1);font-size: 14px;text-align: left;font-family: PingFangSC-regular;">
+                                kg/m2
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text"  >
+                                Blood Pressure:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row single_row">
+                        {% comment %} <div class="col-2" style="height:38px;padding-right:0px;">
+                            <div class="card-text" style="margin-top: 20%;">
+                                
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="col-6 no_padding" >
+                            <div class="form-group">
+                               <span>Systolic:</span>
+                                {{ phr_form.your_blood_pressure_up }}
+                                <span>mm/Hg</span>
+                            </div>
+                           
+                        </div>
+                        {% comment %} <div class="col-2" style="height:38px;padding:0px;">
+                            <div class="card-text" style="margin-top: 16%;">
+                                mm/Hg
+                            </div>
+                        </div> {% endcomment %}
+                        {% comment %} <div class="col-2" style="height:38px;padding:0px;">
+                            <div class="card-text" style="margin-top: 16%;">
+                              Diastolic:
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="col-6 no_padding" >
+                            <div class="form-group">
+                                <span>Diastolic:</span>
+                                {{ phr_form.your_blood_pressure_down }}
+                                <span>mm/Hg</span>
+                            </div>
+                            
+                        </div>
+                        {% comment %} <div class="col-2" style="height:38px;padding-left:0px;">
+                            <div class="card-text" style="margin-top: 20%;">
+                                mm/Hg
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text"  >
+                                Heart rate:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"  >
+                            <div class="form-group"  >
+                                {{ phr_form.your_pulse_rate }}
+                                <span>/min</span>
+                            </div>
+                            
+                        </div>
+                        {% comment %} <div class="col-4"  >
+                            <div class="card-text" style="margin-top: 14%;color: rgba(16, 16, 16, 1);font-size: 14px;text-align: left;font-family: PingFangSC-regular;">
+                                /min
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text"  >
+                                Respiration:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"  >
+                            <div class="form-group"  >
+                                {{ phr_form.your_respiration }}
+                                <span>/min</span>
+                            </div>
+                            
+                        </div>
+                        {% comment %} <div class="col-4"  >
+                            <div class="card-text" style="margin-top: 14%;color: rgba(16, 16, 16, 1);font-size: 14px;text-align: left;font-family: PingFangSC-regular;">
+                                /min
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-text "  >
+                                Smoking:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"  >
+                            <div class="form-group smoking_wapper">
+                                {{ phr_form.your_smoking }}
+                                <span>cigarettes/day</span>
+                            </div>
+                            
+                        </div>
+                        {% comment %} <div class="col-4"  >
+                            <div class="card-text" style="margin-top: 14%;color: rgba(16, 16, 16, 1);font-size: 12px;text-align: left;font-family: PingFangSC-regular;">
+                                cigarettes/day
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+                <div class="row submit_wapper">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <a href="/PHR/index/" class="btn btn-primary" role="button" style="float: left;
+                             text-decoration: none;border-radius: 4px;background-color: rgba(226, 197, 20, 1);
+                             color: rgba(255, 255, 255, 1);font-size: 14px;text-align: left;
+                             font-family: Arial;border: 1px solid rgba(187, 187, 187, 1);width: 100%;">
+                                《 Return
+                            </a>
+                        </div>
+                    </div>
+                    {% comment %} <div class="col-4">
+                    </div> {% endcomment %}
+                    <div class="col-6">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" style="border-radius: 4px;background-color: rgba(22, 132, 252, 1);color: rgba(255, 255, 255, 1);font-size: 14px;font-family: Arial;border: 1px solid rgba(187, 187, 187, 1);width: 100%;">
+                                Submit 》
+                            </button>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <!--
+                    <div>
+                        <button type="submit" class="btn btn-primary float-right">Submit</button>
+                    </div>
+                    -->
+                </form>
+            </div>
+        </div>
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+
+        <script>
+            $(function () {
+                $("#id_your_date").datetimepicker( {
+                    format:'Y-m-d H:i',
+                    step:1,
+                });
+
+            });
+        </script>
+
+
+    </body>
+</html>
